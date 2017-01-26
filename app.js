@@ -25,7 +25,11 @@ const server = http.createServer((req, res) => {
 
   let rule = find(rules, rule => {
     if (rule.path instanceof RegExp) {
-      return pathName.match(rule.path)
+      let matchResult = pathName.match(rule.path)
+      if (matchResult) {
+        req.params = matchResult
+      }
+      return matchResult
     }
     return rule.path === pathName
   })

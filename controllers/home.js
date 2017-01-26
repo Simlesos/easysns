@@ -1,3 +1,10 @@
+const sendFile = require('../utils/sendFile').sendFile
+const joinPath = require('path').join
+
+const viewPath = joinPath(__dirname, '../views')
+
 module.exports = function (req, res) {
-  res.end('home\n')
+  let isLogin = false
+  let view = isLogin ? 'home.html' : 'welcome.html'
+  sendFile(joinPath(viewPath, view), res)
 }
