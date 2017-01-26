@@ -1,13 +1,6 @@
 const http = require('http')
 const parseUrl = require('url').parse
-
-function homeController (req, res) {
-  res.end('home\n')
-}
-
-function userController (req, res) {
-  res.end('user\n')
-}
+const controllers = require('./controllers')
 
 function notFoundController (req, res) {
   res.writeHead(404)
@@ -15,8 +8,9 @@ function notFoundController (req, res) {
 }
 
 const rules = [
-  { path: '/', controller: homeController },
-  { path: '/user', controller: userController }
+  { path: '/', controller: controllers.home },
+  { path: '/user', controller: controllers.user },
+  { path: /^\/static(\/.*)/, controller: controllers.static }
 ]
 
 function find (array, match) {
@@ -30,6 +24,9 @@ const server = http.createServer((req, res) => {
   const pathName = urlInfo.pathname
 
   let rule = find(rules, rule => {
+    if (rule.path instanceof RegExp) {
+      return pathName.match(rule.path)
+    }
     return rule.path === pathName
   })
 
