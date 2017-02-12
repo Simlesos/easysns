@@ -2,9 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>easysns</title>
+  <link rel="stylesheet" href="../public/css/index.css">
 </head>
 <body>
-  <h1>welcome page</h1>
+  <div class="login_box">
+    <ul class="login_bnox__tabs">
+      <li class="tab--active">注册</li>
+      <li class="tab">登录</li>
+    </ul>
+    <div>
+      <div class="tab_panel">
+        <form action="/auth/register" method="POST">
+          <div>
+            <label>邮箱:</label>
+            <input type="email" name="email" placeholder="填写邮箱">
+          </div>
+          <div>
+            <label>密码:</label>
+            <input type="password" name="password" placeholder="填写密码">
+          </div>
+          <div>
+            <label>昵称:</label>
+            <input type="text" name="nickname" placeholder="填写昵称">
+          </div>
+          <div>
+            <button type="submit">注册</button>
+          </div>
+        </form>
+      </div>
+      <div class="tab_panel">
+        <form action="/auth/login" method="POST">
+          <div>
+            <label>邮箱:</label>
+            <input type="email" name="email">
+          </div>
+          <div>
+            <label>密码:</label>
+            <input type="password" name="password">
+          </div>
+          <div>
+            <button type="submit">登录</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

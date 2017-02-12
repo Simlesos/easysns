@@ -10,6 +10,8 @@ function notFoundController (req, res) {
 const rules = [
   { path: '/', controller: controllers.home },
   { path: '/user', controller: controllers.user },
+  { path: '/auth/register', controller: controllers.auth.register },
+  { path: '/auth/login', controller: controllers.auth.login },
   { path: /^\/static(\/.*)/, controller: controllers.static }
 ]
 
@@ -24,6 +26,9 @@ const server = http.createServer((req, res) => {
   const pathName = urlInfo.pathname
 
   let rule = find(rules, rule => {
+    if (rule.method && (rule.method.toLowerCase() !== req.method.toLowerCase())) {
+      return false
+    }
     if (rule.path instanceof RegExp) {
       let matchResult = pathName.match(rule.path)
       if (matchResult) {

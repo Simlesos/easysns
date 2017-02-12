@@ -1,4 +1,4 @@
-const sendFile = require('../utils/sendFile').sendFile
+const sendFile = require('../utils/send').sendFile
 const joinPath = require('path').join
 
 const viewPath = joinPath(__dirname, '../views')
